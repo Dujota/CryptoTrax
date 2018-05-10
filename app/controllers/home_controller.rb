@@ -1,13 +1,11 @@
+require 'net/http'
+require 'json'
+
 class HomeController < ApplicationController
+
+  before_action :load_api, only: [:index, :lookup]
+
   def index
-    require 'net/http'
-    require "json"
-
-    @url = 'https://api.coinmarketcap.com/v1/ticker/'
-    @uri = URI(@url)
-    @response = Net::HTTP.get(@uri)
-    @coins = JSON.parse(@response)
-
     @my_coins = ["BTC", "XRP", "ADA", "XLM", "STEEM"]
   end
 
@@ -16,6 +14,7 @@ class HomeController < ApplicationController
   end
 
   def lookup
+
     @symbol = params[:sym]
     if @symbol
       @symbol = @symbol.upcase
@@ -25,4 +24,14 @@ class HomeController < ApplicationController
       @symbol = "Hey, you forgot to enter a currency!"
     end
   end
+
+  private
+
+  def load_api
+    @url = 'https://api.coinmarketcap.com/v1/ticker/'
+    @uri = URI(@url)
+    @response = Net::HTTP.get(@uri)
+    @coins = JSON.parse(@response)
+  end
+
 end

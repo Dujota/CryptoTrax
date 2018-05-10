@@ -12,6 +12,12 @@
 
   <br><br>
 
-  <%= @symbol %>
-
+  <% if @symbol %>
+    <% for x in @coins %>
+        <% if @symbol == x["symbol"]%>
+          <%= x["name"] %>: $<%=x["price_usd"] %> <br> Rank: <%=x["rank"]%>
+          <br><br>
+      <% end %>
+    <% end %>
+  <% end %>
 <% end %>
