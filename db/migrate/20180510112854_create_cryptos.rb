@@ -6,7 +6,7 @@ class CreateCryptos < ActiveRecord::Migration[5.2]
       t.decimal :cost_per
       t.decimal :amount_owned
 
-      t.timestamps
+      t.timestamps null: false
     end
     add_index :cryptos, :user_id
   end
