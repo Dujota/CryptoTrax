@@ -2,6 +2,7 @@ class CryptosController < ApplicationController
   before_action :set_crypto, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   before_action :correct_user, only: [:edit, :update, :destroy, :show]
+  before_action :load_api
 
   # GET /cryptos
   # GET /cryptos.json
@@ -77,5 +78,12 @@ class CryptosController < ApplicationController
     def correct_user
       @correct = current_user.cryptos.find_by(id: params[:id])
       redirect_to cryptos_path, notice: "Not Authorized to edit this entry" if @correct.nil?
+    end
+
+    def load_api
+      @url = 'https://api.coinmarketcap.com/v1/ticker/'
+      @uri = URI(@url)
+      @response = Net::HTTP.get(@uri)
+      @coins = JSON.parse(@response)
     end
 end
