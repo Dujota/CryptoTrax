@@ -18,7 +18,6 @@
   <%= @crypto.amount_owned %>
 </p>
 
-<%= link_to 'Edit', edit_crypto_path(@crypto) %></td>
-<%= link_to 'Destroy', @crypto, method: :delete, data: { confirm: 'Are you sure?' } %>
-<%= link_to 'Edit', edit_crypto_path(@crypto) %> |
-<%= link_to 'Back', cryptos_path %>
+<%= link_to 'Edit', edit_crypto_path(@crypto), class: "btn btn-default" %></td>
+<%= link_to 'Destroy', @crypto, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-default"%>
+<%= link_to 'Back', cryptos_path, class: "btn btn-default" %>
