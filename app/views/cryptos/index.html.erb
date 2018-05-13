@@ -5,6 +5,7 @@
     <tr>
       <th>Name</th>
       <th>Current Price</th>
+      <th>Rank</th>
       <th>Current Value</th>
       <th>% Change 1H</th>
       <th>% Change 24H</th>
@@ -28,12 +29,16 @@
             <% if crypto.symbol == x["symbol"]%>
               <td><%= link_to x["name"], crypto %></td>
               <td>$<%= x["price_usd"]%></td>
+              <td><%= x["rank"] %></td>
               <td><%= x["percent_change_1h"]%>%</td>
               <td><%= x["percent_change_24h"]%>%</td>
               <td><%= x["percent_change_7d" ]%>%</td>
               <td>$<%= x["price_usd"].to_d * crypto.amount_owned %></td>
               <td>$ <%= crypto.cost_per * crypto.amount_owned %></td>
               <td>$<%= (x["price_usd"].to_d * crypto.amount_owned) -(crypto.cost_per * crypto.amount_owned)%></td>
+
+              <!-- keep track of profit/loss-->
+              <% @profit_loss += (x["price_usd"].to_d * crypto.amount_owned) -(crypto.cost_per * crypto.amount_owned)%>
               <br><br>
           <% end %>
         <% end %>
@@ -49,5 +54,8 @@
 </table>
 
 <br>
+<br>
 
+<strong>Portfolio Profit/Loss:</strong> <%= number_to_currency(@profit_loss) %>
+<br><br>
 <%= link_to 'New Crypto', new_crypto_path, class: "btn btn-default" %>
