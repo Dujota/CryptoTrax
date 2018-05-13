@@ -4,10 +4,15 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Current Price(USD)</th>
-      <th>Current Value(USD)</th>
+      <th>Current Price</th>
+      <th>Current Value</th>
+      <th>% Change 1H</th>
+      <th>% Change 24H</th>
+      <th>% Change 7 Days</th>
+      <th>Total Paid</th>
+      <th>Profit/Loss</th>
       <!-- <th>Symbol</th> -->
-      <th>Cost per</th>
+      <th>Cost Paid Per</th>
       <th>Amount owned</th>
     </tr>
   </thead>
@@ -23,7 +28,12 @@
             <% if crypto.symbol == x["symbol"]%>
               <td><%= link_to x["name"], crypto %></td>
               <td>$<%= x["price_usd"]%></td>
+              <td><%= x["percent_change_1h"]%>%</td>
+              <td><%= x["percent_change_24h"]%>%</td>
+              <td><%= x["percent_change_7d" ]%>%</td>
               <td>$<%= x["price_usd"].to_d * crypto.amount_owned %></td>
+              <td>$ <%= crypto.cost_per * crypto.amount_owned %></td>
+              <td>$<%= (x["price_usd"].to_d * crypto.amount_owned) -(crypto.cost_per * crypto.amount_owned)%></td>
               <br><br>
           <% end %>
         <% end %>
