@@ -63,7 +63,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Gems added by Me
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
-gem 'devise', '~> 4.4', '>= 4.4.3'
+gem 'devise', '~> 4.7'
 gem 'jquery-rails' # For bootstrap functions to work
 
 group :production do
